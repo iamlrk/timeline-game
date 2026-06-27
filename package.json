@@ -6,7 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:sp": "vite --mode singleplayer",
+    "dev:mp": "vite",
     "build": "tsc && vite build",
+    "build:sp": "tsc && vite build --mode singleplayer",
+    "build:mp": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
