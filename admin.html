@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Timeline — Card Admin</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111;
+    --surface2: #1a1a1a;
+    --surface3: #222;
+    --border: rgba(255,255,255,0.15);
+    --border-hard: rgba(255,255,255,0.7);
+    --accent: #7b6cff;
+    --correct: #4caf82;
+    --wrong: #ef5350;
+    --text: #f0f0f0;
+    --text-muted: rgba(255,255,255,0.45);
+    --radius: 0px;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* ── Top bar ── */
+  .topbar {
+    background: var(--surface);
+    border-bottom: 2px solid var(--border-hard);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-title {
+    font-size: 18px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .topbar-title span { color: var(--accent); }
+  .topbar-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .spacer { flex: 1; }
+
+  /* ── Buttons ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border: 2px solid var(--border-hard);
+    background: var(--surface2);
+    color: var(--text);
+    cursor: pointer;
+    box-shadow: 3px 3px 0 rgba(255,255,255,0.15);
+    transition: transform 0.06s, box-shadow 0.06s;
+  }
+  .btn:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 rgba(255,255,255,0.15); }
+  .btn:active { transform: translate(3px,3px); box-shadow: none; }
+  .btn--accent { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 3px 3px 0 rgba(123,108,255,0.4); }
+  .btn--accent:hover { box-shadow: 5px 5px 0 rgba(123,108,255,0.4); }
+  .btn--danger { background: var(--wrong); border-color: var(--wrong); color: #fff; box-shadow: 3px 3px 0 rgba(239,83,80,0.4); }
+  .btn--sm { padding: 4px 10px; font-size: 11px; }
+
+  /* ── Search / filter bar ── */
+  .toolbar {
+    padding: 12px 24px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-input {
+    flex: 1;
+    max-width: 340px;
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    color: var(--text);
+    padding: 7px 12px;
+    font-size: 13px;
+    outline: none;
+  }
+  .search-input:focus { border-color: var(--accent); }
+  select.filter-select {
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    color: var(--text);
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    outline: none;
+    cursor: pointer;
+  }
+  select.filter-select:focus { border-color: var(--accent); }
+
+  /* ── Table ── */
+  .table-wrap {
+    overflow-x: auto;
+    padding: 0 24px 80px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  th {
+    background: var(--surface2);
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border-hard);
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+  }
+  th:hover { color: var(--text); }
+  th.sort-asc::after  { content: ' ↑'; color: var(--accent); }
+  th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+  td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  tr:hover td { background: var(--surface2); }
+  .td-event { font-weight: 700; max-width: 220px; }
+  .td-year { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--accent); white-space: nowrap; }
+  .td-cat { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+  .td-diff { text-align: center; }
+  .diff-pip { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--border); margin: 0 1px; }
+  .diff-pip.on { background: var(--accent); }
+  .td-img { text-align: center; font-size: 18px; }
+  .td-actions { white-space: nowrap; text-align: right; }
+
+  /* Category badges */
+  .cat-badge {
+    display: inline-block;
+    padding: 2px 7px;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border: 1.5px solid;
+  }
+  .cat-science-technology   { color: #4caf82; border-color: #4caf82; }
+  .cat-war-politics         { color: #ef5350; border-color: #ef5350; }
+  .cat-art-culture-religion { color: #ab47bc; border-color: #ab47bc; }
+  .cat-exploration-disasters{ color: #ffa726; border-color: #ffa726; }
+
+  /* ── Modal ── */
+  .modal-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--surface);
+    border: 2px solid var(--border-hard);
+    box-shadow: 8px 8px 0 rgba(255,255,255,0.1);
+    width: 100%;
+    max-width: 640px;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .modal-header {
+    padding: 16px 20px;
+    border-bottom: 2px solid var(--border-hard);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    z-index: 1;
+  }
+  .modal-title {
+    font-size: 15px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+  .modal-footer {
+    padding: 16px 20px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    position: sticky;
+    bottom: 0;
+    background: var(--surface);
+  }
+
+  /* ── Form fields ── */
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .field-row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  label {
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-muted);
+  }
+  input[type=text], input[type=number], textarea, select {
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    color: var(--text);
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    width: 100%;
+    transition: border-color 0.1s;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 72px; }
+  .field-hint { font-size: 11px; color: var(--text-muted); }
+
+  /* ── CSV Modal ── */
+  .csv-drop {
+    border: 2px dashed var(--border);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .csv-drop:hover, .csv-drop.drag-over { border-color: var(--accent); background: rgba(123,108,255,0.06); }
+  .csv-drop-label { font-size: 13px; color: var(--text-muted); }
+  .csv-drop-label strong { color: var(--text); display: block; font-size: 15px; margin-bottom: 6px; }
+  #csv-file-input { display: none; }
+  .csv-preview {
+    display: none;
+    margin-top: 12px;
+  }
+  .csv-preview.show { display: block; }
+  .preview-table-wrap { overflow-x: auto; max-height: 260px; overflow-y: auto; border: 1px solid var(--border); }
+  .preview-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .preview-table th { background: var(--surface3); padding: 6px 10px; text-align: left; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); white-space: nowrap; position: sticky; top: 0; }
+  .preview-table td { padding: 5px 10px; border-bottom: 1px solid var(--border); }
+  .preview-table tr.row-skip td { opacity: 0.4; }
+  .preview-table tr.row-error td { background: rgba(239,83,80,0.1); }
+  .preview-badge { display: inline-block; font-size: 10px; font-weight: 900; padding: 1px 6px; text-transform: uppercase; }
+  .preview-badge.new { background: rgba(76,175,130,0.15); color: var(--correct); }
+  .preview-badge.skip { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+  .preview-badge.err { background: rgba(239,83,80,0.15); color: var(--wrong); }
+  .csv-result {
+    display: none;
+    padding: 12px;
+    border: 2px solid var(--correct);
+    background: rgba(76,175,130,0.08);
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .csv-result.show { display: block; }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--surface);
+    border: 2px solid var(--border-hard);
+    box-shadow: 4px 4px 0 rgba(255,255,255,0.1);
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    max-width: 320px;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+  #toast.ok   { border-color: var(--correct); }
+  #toast.err  { border-color: var(--wrong); }
+
+  .empty-state { text-align: center; padding: 60px 24px; color: var(--text-muted); font-size: 15px; }
+</style>
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="topbar">
+  <div class="topbar-title">TIMELINE <span>ADMIN</span></div>
+  <div class="topbar-count" id="card-count">Loading...</div>
+  <div class="spacer"></div>
+  <button class="btn" onclick="openCsvModal()">Import CSV</button>
+  <button class="btn btn--accent" onclick="openAddModal()">+ Add Card</button>
+</div>
+
+<!-- Filter toolbar -->
+<div class="toolbar">
+  <input class="search-input" type="text" placeholder="Search cards..." id="search-input" oninput="renderTable()" />
+  <select class="filter-select" id="cat-filter" onchange="renderTable()">
+    <option value="">All categories</option>
+    <option value="science-technology">Science &amp; Tech</option>
+    <option value="war-politics">War &amp; Politics</option>
+    <option value="art-culture-religion">Arts &amp; Culture</option>
+    <option value="exploration-disasters">Exploration</option>
+  </select>
+  <select class="filter-select" id="diff-filter" onchange="renderTable()">
+    <option value="">All difficulties</option>
+    <option value="1">Easy (1)</option>
+    <option value="2">Medium (2)</option>
+    <option value="3">Hard (3)</option>
+  </select>
+</div>
+
+<!-- Table -->
+<div class="table-wrap">
+  <table id="cards-table">
+    <thead>
+      <tr>
+        <th onclick="sortBy('event')">Event</th>
+        <th onclick="sortBy('year')">Year</th>
+        <th onclick="sortBy('category')">Category</th>
+        <th onclick="sortBy('difficulty')">Diff</th>
+        <th>Image</th>
+        <th>Slug (ID)</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+  <div class="empty-state" id="empty-state" style="display:none">No cards match your search.</div>
+</div>
+
+<!-- Edit/Add Modal -->
+<div class="modal-backdrop" id="edit-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="modal-title">Edit Card</div>
+      <button class="modal-close" onclick="closeModal('edit-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="f-id" />
+      <div class="field-row">
+        <div class="field" style="grid-column:1/-1">
+          <label>Event Name *</label>
+          <input type="text" id="f-event" placeholder="Apollo 11 Moon Landing" />
+        </div>
+      </div>
+      <div class="field-row3">
+        <div class="field">
+          <label>Year * <span class="field-hint">(negative = BC)</span></label>
+          <input type="number" id="f-year" placeholder="1969" />
+        </div>
+        <div class="field">
+          <label>Month</label>
+          <input type="number" id="f-month" placeholder="7" min="1" max="12" />
+        </div>
+        <div class="field">
+          <label>Day</label>
+          <input type="number" id="f-day" placeholder="20" min="1" max="31" />
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Category *</label>
+          <select id="f-category">
+            <option value="science-technology">Science &amp; Technology</option>
+            <option value="war-politics">War &amp; Politics</option>
+            <option value="art-culture-religion">Art, Culture &amp; Religion</option>
+            <option value="exploration-disasters">Exploration &amp; Disasters</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Difficulty *</label>
+          <select id="f-difficulty">
+            <option value="1">1 — Easy</option>
+            <option value="2">2 — Medium</option>
+            <option value="3">3 — Hard</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Description *</label>
+        <textarea id="f-description" placeholder="2–3 sentence description shown on reveal."></textarea>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Region</label>
+          <input type="text" id="f-region" placeholder="Europe" />
+        </div>
+        <div class="field">
+          <label>Tags <span class="field-hint">(comma separated)</span></label>
+          <input type="text" id="f-tags" placeholder="space, USA, Cold War" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Wikipedia Article Slug <span class="field-hint">(for image proxy)</span></label>
+        <input type="text" id="f-wiki" placeholder="Apollo_11" />
+        <span class="field-hint">e.g. "Apollo_11" from https://en.wikipedia.org/wiki/Apollo_11</span>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Source URL</label>
+          <input type="text" id="f-source" placeholder="https://en.wikipedia.org/wiki/..." />
+        </div>
+        <div class="field">
+          <label>Image Caption</label>
+          <input type="text" id="f-caption" placeholder="Buzz Aldrin on the Moon, 1969" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Custom Image URL <span class="field-hint">(overrides Wikipedia slug)</span></label>
+        <input type="text" id="f-imageurl" placeholder="https://..." />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--danger btn--sm" id="delete-btn" onclick="deleteCard()">Delete</button>
+      <div class="spacer"></div>
+      <button class="btn btn--sm" onclick="closeModal('edit-modal')">Cancel</button>
+      <button class="btn btn--accent btn--sm" onclick="saveCard()">Save Card</button>
+    </div>
+  </div>
+</div>
+
+<!-- CSV Import Modal -->
+<div class="modal-backdrop" id="csv-modal">
+  <div class="modal" style="max-width:780px">
+    <div class="modal-header">
+      <div class="modal-title">Import CSV</div>
+      <button class="modal-close" onclick="closeModal('csv-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div>
+        <p style="color:var(--text-muted);font-size:13px;line-height:1.6;margin-bottom:10px">
+          Upload a CSV file to bulk-add cards. Required columns: <strong>event, year, category, description, difficulty</strong>.<br>
+          Optional: id, month, day, region, tags (semicolon-separated), source, wikipediaSlug, imageUrl, imageCaption.<br>
+          Cards whose ID already exists will be skipped.
+        </p>
+        <div style="background:var(--surface2);border:1px solid var(--border);padding:10px 14px;font-size:11px;font-family:monospace;color:var(--text-muted);margin-bottom:14px;overflow-x:auto;white-space:nowrap">
+          event,year,category,description,difficulty,region,tags,source,wikipediaSlug<br>
+          "First Moon Landing",1969,science-technology,"Apollo 11...",1,Global,"space;USA",https://...,Apollo_11
+        </div>
+        <div class="csv-drop" id="csv-drop" onclick="document.getElementById('csv-file-input').click()" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropFile(event)">
+          <label class="csv-drop-label">
+            <strong>Drop CSV here or click to browse</strong>
+            .csv files only — up to 10 MB
+          </label>
+        </div>
+        <input type="file" id="csv-file-input" accept=".csv,text/csv" onchange="loadCsvFile(event)" />
+      </div>
+
+      <div class="csv-preview" id="csv-preview">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+          <span style="font-size:12px;font-weight:700" id="preview-summary"></span>
+          <div class="spacer"></div>
+          <button class="btn btn--sm" onclick="clearCsv()">Clear</button>
+        </div>
+        <div class="preview-table-wrap">
+          <table class="preview-table">
+            <thead><tr id="preview-header"></tr></thead>
+            <tbody id="preview-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="csv-result" id="csv-result"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--sm" onclick="closeModal('csv-modal')">Cancel</button>
+      <button class="btn btn--accent btn--sm" id="import-btn" onclick="importCsv()" disabled>Import Cards</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let allCards = [];
+let csvRaw = '';
+let sortCol = 'year';
+let sortDir = 1;
+let editingId = null;
+
+// ── Data ──────────────────────────────────────────────────────────────
+async function loadCards() {
+  const res = await fetch('/api/cards');
+  allCards = await res.json();
+  document.getElementById('card-count').textContent = `${allCards.length} cards`;
+  renderTable();
+}
+
+// ── Table ─────────────────────────────────────────────────────────────
+const CAT_LABEL = {
+  'science-technology': 'Science & Tech',
+  'war-politics': 'War & Politics',
+  'art-culture-religion': 'Arts & Culture',
+  'exploration-disasters': 'Exploration',
+};
+
+function renderTable() {
+  const q = document.getElementById('search-input').value.toLowerCase();
+  const cat = document.getElementById('cat-filter').value;
+  const diff = document.getElementById('diff-filter').value;
+
+  let rows = allCards.filter(c => {
+    if (cat && c.category !== cat) return false;
+    if (diff && String(c.difficulty) !== diff) return false;
+    if (q && !(c.event.toLowerCase().includes(q) || c.id.toLowerCase().includes(q) || (c.description||'').toLowerCase().includes(q))) return false;
+    return true;
+  });
+
+  rows.sort((a, b) => {
+    const av = a[sortCol] ?? '';
+    const bv = b[sortCol] ?? '';
+    return av < bv ? -sortDir : av > bv ? sortDir : 0;
+  });
+
+  const tbody = document.getElementById('table-body');
+  tbody.innerHTML = '';
+
+  rows.forEach(card => {
+    const tr = document.createElement('tr');
+    const hasImg = !!(card.wikipediaSlug || card.imageUrl);
+    const catClass = 'cat-' + card.category.replace(/-/g,'');
+    // BUG FIX: use the correct class mapping
+    const catClassFixed = card.category.replace(/[^a-z]/g, c => c === '-' ? '-' : '');
+    tr.innerHTML = `
+      <td class="td-event">${esc(card.event)}</td>
+      <td class="td-year">${fmtYear(card.year)}</td>
+      <td class="td-cat"><span class="cat-badge cat-${card.category}">${CAT_LABEL[card.category] || card.category}</span></td>
+      <td class="td-diff">${diffPips(card.difficulty)}</td>
+      <td class="td-img">${hasImg ? '&#10003;' : ''}</td>
+      <td style="font-size:11px;color:var(--text-muted);font-family:monospace">${esc(card.id)}</td>
+      <td class="td-actions">
+        <button class="btn btn--sm" onclick='openEditModal(${JSON.stringify(card.id)})'>Edit</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById('empty-state').style.display = rows.length ? 'none' : 'block';
+
+  // Update sort indicators
+  document.querySelectorAll('th').forEach(th => th.classList.remove('sort-asc','sort-desc'));
+  const ths = ['event','year','category','difficulty'];
+  ths.forEach((col,i) => {
+    if (col === sortCol) {
+      document.querySelectorAll('th')[i].classList.add(sortDir === 1 ? 'sort-asc' : 'sort-desc');
+    }
+  });
+}
+
+function sortBy(col) {
+  if (sortCol === col) sortDir *= -1;
+  else { sortCol = col; sortDir = 1; }
+  renderTable();
+}
+
+function fmtYear(y) { return y < 0 ? `${Math.abs(y)} BC` : `${y} AD`; }
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function diffPips(d) {
+  return [1,2,3].map(i => `<span class="diff-pip ${i<=d?'on':''}"></span>`).join('');
+}
+
+// ── Edit / Add Modal ──────────────────────────────────────────────────
+function openAddModal() {
+  editingId = null;
+  document.getElementById('modal-title').textContent = 'Add Card';
+  document.getElementById('delete-btn').style.display = 'none';
+  clearForm();
+  openModal('edit-modal');
+}
+
+function openEditModal(id) {
+  const card = allCards.find(c => c.id === id);
+  if (!card) return;
+  editingId = id;
+  document.getElementById('modal-title').textContent = 'Edit Card';
+  document.getElementById('delete-btn').style.display = '';
+  fillForm(card);
+  openModal('edit-modal');
+}
+
+function fillForm(card) {
+  document.getElementById('f-id').value = card.id || '';
+  document.getElementById('f-event').value = card.event || '';
+  document.getElementById('f-year').value = card.year ?? '';
+  document.getElementById('f-month').value = card.month || '';
+  document.getElementById('f-day').value = card.day || '';
+  document.getElementById('f-category').value = card.category || 'war-politics';
+  document.getElementById('f-difficulty').value = card.difficulty || '1';
+  document.getElementById('f-description').value = card.description || '';
+  document.getElementById('f-region').value = card.region || '';
+  document.getElementById('f-tags').value = (card.tags || []).join(', ');
+  document.getElementById('f-wiki').value = card.wikipediaSlug || '';
+  document.getElementById('f-source').value = card.source || '';
+  document.getElementById('f-caption').value = card.imageCaption || '';
+  document.getElementById('f-imageurl').value = card.imageUrl || '';
+}
+
+function clearForm() {
+  ['f-id','f-event','f-year','f-month','f-day','f-description','f-region','f-tags','f-wiki','f-source','f-caption','f-imageurl'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-category').value = 'war-politics';
+  document.getElementById('f-difficulty').value = '1';
+}
+
+function formToCard() {
+  const card = {};
+  const event = document.getElementById('f-event').value.trim();
+  const year = parseInt(document.getElementById('f-year').value, 10);
+  if (!event) { toast('Event name is required', 'err'); return null; }
+  if (isNaN(year)) { toast('Valid year is required', 'err'); return null; }
+  card.event = event;
+  card.year = year;
+  const month = parseInt(document.getElementById('f-month').value, 10);
+  const day = parseInt(document.getElementById('f-day').value, 10);
+  if (!isNaN(month) && month) card.month = month;
+  if (!isNaN(day) && day) card.day = day;
+  card.category = document.getElementById('f-category').value;
+  card.difficulty = parseInt(document.getElementById('f-difficulty').value, 10);
+  card.description = document.getElementById('f-description').value.trim();
+  const region = document.getElementById('f-region').value.trim();
+  if (region) card.region = region;
+  const tagsRaw = document.getElementById('f-tags').value;
+  card.tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+  const wiki = document.getElementById('f-wiki').value.trim();
+  if (wiki) card.wikipediaSlug = wiki;
+  const source = document.getElementById('f-source').value.trim();
+  if (source) card.source = source;
+  const caption = document.getElementById('f-caption').value.trim();
+  if (caption) card.imageCaption = caption;
+  const imageUrl = document.getElementById('f-imageurl').value.trim();
+  if (imageUrl) card.imageUrl = imageUrl;
+  return card;
+}
+
+async function saveCard() {
+  const card = formToCard();
+  if (!card) return;
+
+  let res;
+  if (editingId) {
+    res = await fetch(`/api/cards/${editingId}`, {
+      method: 'PUT', headers: {'Content-Type':'application/json'}, body: JSON.stringify(card)
+    });
+  } else {
+    res = await fetch('/api/cards', {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(card)
+    });
+  }
+
+  if (res.ok) {
+    closeModal('edit-modal');
+    await loadCards();
+    toast(editingId ? 'Card updated' : 'Card added', 'ok');
+  } else {
+    const err = await res.json().catch(() => ({}));
+    toast(err.error || 'Save failed', 'err');
+  }
+}
+
+async function deleteCard() {
+  if (!editingId) return;
+  if (!confirm(`Delete "${allCards.find(c=>c.id===editingId)?.event}"? This cannot be undone.`)) return;
+  const res = await fetch(`/api/cards/${editingId}`, { method: 'DELETE' });
+  if (res.ok) {
+    closeModal('edit-modal');
+    await loadCards();
+    toast('Card deleted', 'ok');
+  } else {
+    toast('Delete failed', 'err');
+  }
+}
+
+// ── CSV Import ────────────────────────────────────────────────────────
+function openCsvModal() {
+  clearCsv();
+  document.getElementById('csv-result').classList.remove('show');
+  openModal('csv-modal');
+}
+
+function dragOver(e) { e.preventDefault(); document.getElementById('csv-drop').classList.add('drag-over'); }
+function dragLeave()  { document.getElementById('csv-drop').classList.remove('drag-over'); }
+function dropFile(e)  { e.preventDefault(); dragLeave(); loadFile(e.dataTransfer.files[0]); }
+function loadCsvFile(e) { loadFile(e.target.files[0]); }
+
+function loadFile(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => { csvRaw = e.target.result; previewCsv(csvRaw); };
+  reader.readAsText(file);
+}
+
+function clearCsv() {
+  csvRaw = '';
+  document.getElementById('csv-preview').classList.remove('show');
+  document.getElementById('csv-file-input').value = '';
+  document.getElementById('import-btn').disabled = true;
+}
+
+function previewCsv(csv) {
+  const lines = csv.split(/\r?\n/).filter(l => l.trim());
+  if (lines.length < 2) { toast('CSV needs a header row + at least 1 data row', 'err'); return; }
+
+  const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+  const existingIds = new Set(allCards.map(c => c.id));
+
+  // Build slugify helper in JS too
+  const slugify = (event, year) =>
+    event.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    + '-' + Math.abs(year) + (year < 0 ? 'bc' : '');
+
+  const headerEl = document.getElementById('preview-header');
+  headerEl.innerHTML = '<th>Status</th>' + headers.map(h => `<th>${esc(h)}</th>`).join('');
+
+  const tbody = document.getElementById('preview-body');
+  tbody.innerHTML = '';
+  let newCount = 0, skipCount = 0, errCount = 0;
+
+  for (let i = 1; i < lines.length; i++) {
+    const vals = lines[i].split(',').map(v => v.replace(/^"|"$/g,'').trim());
+    const row = {};
+    headers.forEach((h,j) => { row[h] = vals[j] ?? ''; });
+
+    let status, statusClass;
+    const year = parseInt(row.year, 10);
+    const id = row.id || (row.event && !isNaN(year) ? slugify(row.event, year) : '');
+
+    if (!row.event || isNaN(year)) {
+      status = 'error'; statusClass = 'row-error'; errCount++;
+    } else if (existingIds.has(id)) {
+      status = 'skip'; statusClass = 'row-skip'; skipCount++;
+    } else {
+      status = 'new'; statusClass = ''; newCount++;
+    }
+
+    const tr = document.createElement('tr');
+    tr.className = statusClass;
+    tr.innerHTML = `<td><span class="preview-badge ${status}">${status}</span></td>`
+      + headers.map(h => `<td>${esc(row[h])}</td>`).join('');
+    tbody.appendChild(tr);
+  }
+
+  document.getElementById('preview-summary').innerHTML =
+    `<span style="color:var(--correct)">${newCount} to add</span> &nbsp;` +
+    `<span style="color:var(--text-muted)">${skipCount} to skip</span>` +
+    (errCount ? ` &nbsp;<span style="color:var(--wrong)">${errCount} errors</span>` : '');
+
+  document.getElementById('csv-preview').classList.add('show');
+  document.getElementById('import-btn').disabled = newCount === 0;
+}
+
+async function importCsv() {
+  if (!csvRaw) return;
+  document.getElementById('import-btn').disabled = true;
+  const res = await fetch('/api/cards/import', {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/csv' },
+    body: csvRaw,
+  });
+  const data = await res.json();
+  const resultEl = document.getElementById('csv-result');
+  const errHtml = data.errors?.length
+    ? `<br><span style="color:var(--wrong)">${data.errors.slice(0,5).join('<br>')}</span>` : '';
+  resultEl.innerHTML = `Added <strong>${data.added}</strong> cards. Skipped ${data.skipped?.length||0}.${errHtml}`;
+  resultEl.classList.add('show');
+  await loadCards();
+  toast(`Imported ${data.added} cards`, data.added > 0 ? 'ok' : 'err');
+}
+
+// ── Modal helpers ─────────────────────────────────────────────────────
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+document.querySelectorAll('.modal-backdrop').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+});
+
+// ── Toast ─────────────────────────────────────────────────────────────
+let toastTimer;
+function toast(msg, type='ok') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.className = '', 2800);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+loadCards();
+</script>
+</body>
+</html>
