@@ -1,0 +1,19 @@
+{
+  "name": "timeline-game",
+  "version": "0.1.0",
+  "description": "Browser-based multiplayer timeline card game",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "socket.io-client": "^4.7.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0"
+  }
+}
