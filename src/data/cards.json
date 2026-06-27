@@ -1,0 +1,577 @@
+[
+  {
+    "id": "great-pyramid-2560bc",
+    "event": "Great Pyramid of Giza Completed",
+    "year": -2560,
+    "description": "The Great Pyramid of Giza was built as a tomb for Pharaoh Khufu and stood as the tallest man-made structure for over 3,800 years. It is the only surviving wonder of the ancient world, composed of an estimated 2.3 million stone blocks.",
+    "category": "art-culture-religion",
+    "tags": [
+      "Egypt",
+      "ancient world",
+      "architecture",
+      "pharaoh"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Kheops-Pyramid.jpg/640px-Kheops-Pyramid.jpg",
+    "imageCaption": "The Great Pyramid of Giza, c. 2560 BC",
+    "source": "https://en.wikipedia.org/wiki/Great_Pyramid_of_Giza",
+    "region": "Africa",
+    "wikipediaSlug": "Great_Pyramid_of_Giza"
+  },
+  {
+    "id": "julius-caesar-assassinated-44bc",
+    "event": "Julius Caesar Assassinated",
+    "year": -44,
+    "month": 3,
+    "day": 15,
+    "description": "Roman dictator Julius Caesar was stabbed to death by a group of senators led by Brutus and Cassius on the Ides of March. His assassination triggered a series of civil wars that ended the Roman Republic and led to the rise of the Roman Empire under his adopted son Octavian.",
+    "category": "war-politics",
+    "tags": [
+      "Rome",
+      "assassination",
+      "republic",
+      "senate"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Ides_of_March_Anachronous.png/640px-Ides_of_March_Anachronous.png",
+    "imageCaption": "The assassination of Julius Caesar, 44 BC",
+    "source": "https://en.wikipedia.org/wiki/Assassination_of_Julius_Caesar",
+    "region": "Europe",
+    "wikipediaSlug": "Assassination_of_Julius_Caesar"
+  },
+  {
+    "id": "vesuvius-eruption-79",
+    "event": "Mount Vesuvius Erupts, Destroying Pompeii",
+    "year": 79,
+    "month": 10,
+    "day": 24,
+    "description": "The catastrophic eruption of Mount Vesuvius buried the Roman city of Pompeii under metres of volcanic ash and pumice, killing thousands. The city was so perfectly preserved that it became one of history's most important archaeological sites.",
+    "category": "exploration-disasters",
+    "tags": [
+      "Rome",
+      "volcano",
+      "Italy",
+      "archaeology"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Pompeii_-_Cast_of_a_dog.jpg/640px-Pompeii_-_Cast_of_a_dog.jpg",
+    "imageCaption": "Plaster cast of a victim at Pompeii",
+    "source": "https://en.wikipedia.org/wiki/Eruption_of_Mount_Vesuvius_in_79_AD",
+    "region": "Europe",
+    "wikipediaSlug": "Eruption_of_Mount_Vesuvius_in_79_AD"
+  },
+  {
+    "id": "magna-carta-1215",
+    "event": "Magna Carta Signed",
+    "year": 1215,
+    "month": 6,
+    "day": 15,
+    "description": "King John of England was forced by rebellious barons to sign the Magna Carta, a royal charter limiting the power of the monarchy. It is considered one of the first steps toward constitutional government and influenced democratic law worldwide.",
+    "category": "war-politics",
+    "tags": [
+      "England",
+      "law",
+      "democracy",
+      "monarchy"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Magna_Carta_%28British_Library_Cotton_MS_Augustus_II.106%29.jpg/640px-Magna_Carta_%28British_Library_Cotton_MS_Augustus_II.106%29.jpg",
+    "imageCaption": "The Magna Carta, 1215",
+    "source": "https://en.wikipedia.org/wiki/Magna_Carta",
+    "region": "Europe",
+    "wikipediaSlug": "Magna_Carta"
+  },
+  {
+    "id": "black-death-1347",
+    "event": "Black Death Reaches Europe",
+    "year": 1347,
+    "description": "The bubonic plague arrived in Europe via Sicilian ports, triggering the deadliest pandemic in human history. Over the next five years it killed an estimated 30–60% of Europe's population, reshaping medieval society, economy, and religion.",
+    "category": "exploration-disasters",
+    "tags": [
+      "pandemic",
+      "medieval",
+      "plague",
+      "Europe"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Bubonic_plague-en.svg/640px-Bubonic_plague-en.svg.png",
+    "imageCaption": "Spread of the Black Death across Europe",
+    "source": "https://en.wikipedia.org/wiki/Black_Death",
+    "region": "Europe",
+    "wikipediaSlug": "Black_Death"
+  },
+  {
+    "id": "fall-of-constantinople-1453",
+    "event": "Fall of Constantinople",
+    "year": 1453,
+    "month": 5,
+    "day": 29,
+    "description": "Ottoman forces under Sultan Mehmed II captured Constantinople, ending the Byzantine Empire after over a thousand years. The fall marked the end of the Middle Ages and prompted European powers to seek new trade routes to Asia.",
+    "category": "war-politics",
+    "tags": [
+      "Ottoman",
+      "Byzantine",
+      "siege",
+      "Turkey"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/The_Entry_of_Mahomet_II_into_Constantinople_by_Fausto_Zonaro.jpg/640px-The_Entry_of_Mahomet_II_into_Constantinople_by_Fausto_Zonaro.jpg",
+    "imageCaption": "Mehmed II enters Constantinople, 1453",
+    "source": "https://en.wikipedia.org/wiki/Fall_of_Constantinople",
+    "region": "Europe",
+    "wikipediaSlug": "Fall_of_Constantinople"
+  },
+  {
+    "id": "gutenberg-bible-1455",
+    "event": "Gutenberg Prints the First Bible",
+    "year": 1455,
+    "description": "Johannes Gutenberg completed printing the first major book produced using movable type in Europe — the Gutenberg Bible. His printing press revolutionised the spread of information, making books affordable and accelerating the Renaissance, Reformation, and Scientific Revolution.",
+    "category": "science-technology",
+    "tags": [
+      "printing",
+      "Germany",
+      "Renaissance",
+      "communication"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg/640px-Gutenberg_Bible%2C_Lenox_Copy%2C_New_York_Public_Library%2C_2009._Pic_01.jpg",
+    "imageCaption": "The Gutenberg Bible, c. 1455",
+    "source": "https://en.wikipedia.org/wiki/Gutenberg_Bible",
+    "region": "Europe",
+    "wikipediaSlug": "Gutenberg_Bible"
+  },
+  {
+    "id": "columbus-1492",
+    "event": "Columbus Reaches the Americas",
+    "year": 1492,
+    "month": 10,
+    "day": 12,
+    "description": "Christopher Columbus, sailing under the Spanish crown, made landfall in the Bahamas — the first European contact with the Americas since the Vikings. This voyage began the Columbian Exchange and the era of European colonisation of the New World.",
+    "category": "exploration-disasters",
+    "tags": [
+      "exploration",
+      "Spain",
+      "Americas",
+      "colonisation"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Columbus_taking_possession.jpg/640px-Columbus_taking_possession.jpg",
+    "imageCaption": "Columbus taking possession of the New World",
+    "source": "https://en.wikipedia.org/wiki/Voyages_of_Christopher_Columbus",
+    "region": "Americas",
+    "wikipediaSlug": "Voyages_of_Christopher_Columbus"
+  },
+  {
+    "id": "sistine-chapel-1512",
+    "event": "Sistine Chapel Ceiling Completed",
+    "year": 1512,
+    "month": 10,
+    "day": 31,
+    "description": "Michelangelo completed his monumental fresco on the ceiling of the Sistine Chapel in the Vatican after four years of work. The ceiling, featuring the iconic 'Creation of Adam', is widely considered one of the greatest artworks ever created.",
+    "category": "art-culture-religion",
+    "tags": [
+      "Renaissance",
+      "Italy",
+      "painting",
+      "Vatican"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg/640px-Michelangelo_-_Creation_of_Adam_%28cropped%29.jpg",
+    "imageCaption": "The Creation of Adam, Michelangelo, 1512",
+    "source": "https://en.wikipedia.org/wiki/Sistine_Chapel_ceiling",
+    "region": "Europe",
+    "wikipediaSlug": "Sistine_Chapel_ceiling"
+  },
+  {
+    "id": "magellan-circumnavigation-1522",
+    "event": "First Circumnavigation of the Globe Completed",
+    "year": 1522,
+    "month": 9,
+    "day": 6,
+    "description": "The expedition led by Ferdinand Magellan (completed by Juan Sebastián Elcano after Magellan's death) returned to Spain, becoming the first to circumnavigate the globe. The voyage definitively proved the Earth was spherical and vastly expanded European geographic knowledge.",
+    "category": "exploration-disasters",
+    "tags": [
+      "exploration",
+      "Spain",
+      "navigation",
+      "globe"
+    ],
+    "difficulty": 2,
+    "source": "https://en.wikipedia.org/wiki/Magellan%E2%80%93Elcano_expedition",
+    "region": "Global",
+    "wikipediaSlug": "Magellan%E2%80%93Elcano_expedition"
+  },
+  {
+    "id": "shakespeare-globe-1599",
+    "event": "Globe Theatre Opens in London",
+    "year": 1599,
+    "description": "Shakespeare's playing company built the Globe Theatre on the south bank of the Thames. It became the home of many of Shakespeare's most celebrated plays, including Hamlet, Othello, and King Lear, and remains a symbol of the English Renaissance.",
+    "category": "art-culture-religion",
+    "tags": [
+      "Shakespeare",
+      "England",
+      "theatre",
+      "Renaissance"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Shakespeare%27s_Globe_Theatre.jpg/640px-Shakespeare%27s_Globe_Theatre.jpg",
+    "imageCaption": "The reconstructed Globe Theatre, London",
+    "source": "https://en.wikipedia.org/wiki/Globe_Theatre",
+    "region": "Europe",
+    "wikipediaSlug": "Globe_Theatre"
+  },
+  {
+    "id": "galileo-telescope-1609",
+    "event": "Galileo First Uses Telescope for Astronomy",
+    "year": 1609,
+    "description": "Galileo Galilei turned an improved telescope skyward and observed the moons of Jupiter, the phases of Venus, and craters on the Moon. His observations provided crucial evidence for the heliocentric model of the solar system, challenging the Church's teachings.",
+    "category": "science-technology",
+    "tags": [
+      "astronomy",
+      "Italy",
+      "telescope",
+      "Renaissance"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg/480px-Justus_Sustermans_-_Portrait_of_Galileo_Galilei%2C_1636.jpg",
+    "imageCaption": "Portrait of Galileo Galilei, 1636",
+    "source": "https://en.wikipedia.org/wiki/Galileo_Galilei",
+    "region": "Europe",
+    "wikipediaSlug": "Galileo_Galilei"
+  },
+  {
+    "id": "american-independence-1776",
+    "event": "American Declaration of Independence",
+    "year": 1776,
+    "month": 7,
+    "day": 4,
+    "description": "The thirteen American colonies declared independence from Britain, stating that all men are created equal and endowed with unalienable rights. The document, primarily authored by Thomas Jefferson, became a foundational text of modern democracy.",
+    "category": "war-politics",
+    "tags": [
+      "USA",
+      "revolution",
+      "democracy",
+      "Britain"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/United_States_Declaration_of_Independence.jpg/640px-United_States_Declaration_of_Independence.jpg",
+    "imageCaption": "The Declaration of Independence, 1776",
+    "source": "https://en.wikipedia.org/wiki/United_States_Declaration_of_Independence",
+    "region": "North America",
+    "wikipediaSlug": "United_States_Declaration_of_Independence"
+  },
+  {
+    "id": "french-revolution-1789",
+    "event": "French Revolution Begins",
+    "year": 1789,
+    "month": 7,
+    "day": 14,
+    "description": "The storming of the Bastille fortress on 14 July marked the beginning of the French Revolution, which overthrew the monarchy and reshaped European politics. The Revolution introduced ideals of liberty, equality, and fraternity that influenced democracies worldwide.",
+    "category": "war-politics",
+    "tags": [
+      "France",
+      "revolution",
+      "monarchy",
+      "Bastille"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Anonymous_-_Prise_de_la_Bastille.jpg/640px-Anonymous_-_Prise_de_la_Bastille.jpg",
+    "imageCaption": "The Storming of the Bastille, 14 July 1789",
+    "source": "https://en.wikipedia.org/wiki/French_Revolution",
+    "region": "Europe",
+    "wikipediaSlug": "French_Revolution"
+  },
+  {
+    "id": "beethoven-9th-1824",
+    "event": "Beethoven Premieres His 9th Symphony",
+    "year": 1824,
+    "month": 5,
+    "day": 7,
+    "description": "Ludwig van Beethoven conducted the premiere of his 9th Symphony in Vienna, despite being completely deaf. The symphony's final movement features the 'Ode to Joy' chorus, now the anthem of the European Union and one of the most recognised pieces of music ever written.",
+    "category": "art-culture-religion",
+    "tags": [
+      "music",
+      "Germany",
+      "classical",
+      "Vienna"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Beethoven.jpg/480px-Beethoven.jpg",
+    "imageCaption": "Ludwig van Beethoven, portrait c. 1820",
+    "source": "https://en.wikipedia.org/wiki/Symphony_No._9_(Beethoven)",
+    "region": "Europe",
+    "wikipediaSlug": "Symphony_No._9_(Beethoven)"
+  },
+  {
+    "id": "darwin-origin-1859",
+    "event": "Darwin Publishes On the Origin of Species",
+    "year": 1859,
+    "month": 11,
+    "day": 24,
+    "description": "Charles Darwin published his theory of evolution by natural selection, arguing that all species of life descended from common ancestors through a process of gradual change. The book transformed biology and remains one of the most influential scientific works ever written.",
+    "category": "science-technology",
+    "tags": [
+      "evolution",
+      "biology",
+      "England",
+      "science"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Charles_Darwin_seated_crop.jpg/480px-Charles_Darwin_seated_crop.jpg",
+    "imageCaption": "Charles Darwin, c. 1875",
+    "source": "https://en.wikipedia.org/wiki/On_the_Origin_of_Species",
+    "region": "Europe",
+    "wikipediaSlug": "On_the_Origin_of_Species"
+  },
+  {
+    "id": "lumiere-cinema-1895",
+    "event": "First Public Film Screening",
+    "year": 1895,
+    "month": 12,
+    "day": 28,
+    "description": "The Lumière brothers held the first paid public screening of motion pictures at the Grand Café in Paris. Their short films, including 'Workers Leaving the Lumière Factory', marked the birth of cinema as a public entertainment medium.",
+    "category": "art-culture-religion",
+    "tags": [
+      "cinema",
+      "France",
+      "Lumière",
+      "film"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/001_lumiere.jpg/640px-001_lumiere.jpg",
+    "imageCaption": "Still from L'Arrivée d'un train en gare de La Ciotat, 1895",
+    "source": "https://en.wikipedia.org/wiki/History_of_film",
+    "region": "Europe",
+    "wikipediaSlug": "History_of_film"
+  },
+  {
+    "id": "wright-brothers-1903",
+    "event": "Wright Brothers Achieve First Powered Flight",
+    "year": 1903,
+    "month": 12,
+    "day": 17,
+    "description": "Orville and Wilbur Wright achieved the first successful powered, sustained, and controlled heavier-than-air flight at Kitty Hawk, North Carolina. Their 12-second, 36-metre flight launched the aviation age.",
+    "category": "science-technology",
+    "tags": [
+      "aviation",
+      "USA",
+      "invention",
+      "flight"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Wrightflyer.jpg/640px-Wrightflyer.jpg",
+    "imageCaption": "The Wright Flyer's first flight, 17 December 1903",
+    "source": "https://en.wikipedia.org/wiki/Wright_Flyer",
+    "region": "North America",
+    "wikipediaSlug": "Wright_Flyer"
+  },
+  {
+    "id": "titanic-1912",
+    "event": "RMS Titanic Sinks",
+    "year": 1912,
+    "month": 4,
+    "day": 15,
+    "description": "The RMS Titanic, the world's largest and most luxurious ocean liner, sank in the North Atlantic after striking an iceberg on her maiden voyage. Over 1,500 people died, making it one of the deadliest peacetime maritime disasters in history.",
+    "category": "exploration-disasters",
+    "tags": [
+      "shipwreck",
+      "Atlantic",
+      "disaster",
+      "maritime"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/RMS_Titanic_3.jpg/640px-RMS_Titanic_3.jpg",
+    "imageCaption": "RMS Titanic departing Southampton, April 1912",
+    "source": "https://en.wikipedia.org/wiki/Sinking_of_the_Titanic",
+    "region": "North Atlantic",
+    "wikipediaSlug": "Sinking_of_the_Titanic"
+  },
+  {
+    "id": "ww1-begins-1914",
+    "event": "World War I Begins",
+    "year": 1914,
+    "month": 7,
+    "day": 28,
+    "description": "Following the assassination of Archduke Franz Ferdinand of Austria, a cascade of alliances drew Europe's major powers into the most devastating war the world had yet seen. World War I lasted four years, killed over 17 million people, and redrew the map of Europe.",
+    "category": "war-politics",
+    "tags": [
+      "war",
+      "Europe",
+      "alliances",
+      "empire"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Into_the_Jaws_of_Death_23-0455M_edit.jpg/640px-Into_the_Jaws_of_Death_23-0455M_edit.jpg",
+    "imageCaption": "Allied troops during World War I",
+    "source": "https://en.wikipedia.org/wiki/World_War_I",
+    "region": "Europe",
+    "wikipediaSlug": "World_War_I"
+  },
+  {
+    "id": "penicillin-1928",
+    "event": "Fleming Discovers Penicillin",
+    "year": 1928,
+    "month": 9,
+    "description": "Alexander Fleming noticed that a mould (Penicillium notatum) was killing bacteria in one of his petri dishes. This accidental discovery led to the development of penicillin antibiotics, saving hundreds of millions of lives and transforming modern medicine.",
+    "category": "science-technology",
+    "tags": [
+      "medicine",
+      "Scotland",
+      "antibiotics",
+      "discovery"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Penicillin_past_present_future-news.jpg/640px-Penicillin_past_present_future-news.jpg",
+    "imageCaption": "Penicillin culture, Fleming's original discovery",
+    "source": "https://en.wikipedia.org/wiki/Penicillin",
+    "region": "Europe",
+    "wikipediaSlug": "Penicillin"
+  },
+  {
+    "id": "ww2-ends-1945",
+    "event": "World War II Ends",
+    "year": 1945,
+    "month": 9,
+    "day": 2,
+    "description": "Japan formally surrendered aboard the USS Missouri in Tokyo Bay, ending World War II — the deadliest conflict in human history. The war killed an estimated 70–85 million people and led directly to the founding of the United Nations and the Cold War era.",
+    "category": "war-politics",
+    "tags": [
+      "war",
+      "Japan",
+      "surrender",
+      "allies"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Raising_the_Flag_on_Iwo_Jima%2C_larger_-_edit1.jpg/480px-Raising_the_Flag_on_Iwo_Jima%2C_larger_-_edit1.jpg",
+    "imageCaption": "Raising the Flag on Iwo Jima, February 1945",
+    "source": "https://en.wikipedia.org/wiki/World_War_II",
+    "region": "Global",
+    "wikipediaSlug": "World_War_II"
+  },
+  {
+    "id": "dna-double-helix-1953",
+    "event": "DNA Double Helix Discovered",
+    "year": 1953,
+    "month": 4,
+    "day": 25,
+    "description": "James Watson and Francis Crick, building on X-ray data from Rosalind Franklin, published the double helix structure of DNA. This discovery revealed how genetic information is stored and copied, founding modern molecular biology and genomics.",
+    "category": "science-technology",
+    "tags": [
+      "DNA",
+      "genetics",
+      "biology",
+      "England"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/DNA_Structure%2BKey%2BLabelled.pn_NoBB.png/480px-DNA_Structure%2BKey%2BLabelled.pn_NoBB.png",
+    "imageCaption": "Diagram of the DNA double helix structure",
+    "source": "https://en.wikipedia.org/wiki/Nucleic_acid_double_helix",
+    "region": "Europe",
+    "wikipediaSlug": "Nucleic_acid_double_helix"
+  },
+  {
+    "id": "moon-landing-1969",
+    "event": "Apollo 11 Moon Landing",
+    "year": 1969,
+    "month": 7,
+    "day": 20,
+    "description": "NASA astronauts Neil Armstrong and Buzz Aldrin became the first humans to walk on the Moon during the Apollo 11 mission. Armstrong's words — 'one small step for man, one giant leap for mankind' — were broadcast to an estimated 600 million people worldwide.",
+    "category": "exploration-disasters",
+    "tags": [
+      "space",
+      "USA",
+      "NASA",
+      "Cold War"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/480px-Aldrin_Apollo_11_original.jpg",
+    "imageCaption": "Buzz Aldrin on the Moon, 20 July 1969",
+    "source": "https://en.wikipedia.org/wiki/Apollo_11",
+    "region": "Space",
+    "wikipediaSlug": "Apollo_11"
+  },
+  {
+    "id": "chernobyl-1986",
+    "event": "Chernobyl Nuclear Disaster",
+    "year": 1986,
+    "month": 4,
+    "day": 26,
+    "description": "Reactor No. 4 at the Chernobyl Nuclear Power Plant in Soviet Ukraine exploded during a safety test, releasing large quantities of radioactive particles. It remains the worst nuclear accident in history and contributed to growing public opposition to nuclear power worldwide.",
+    "category": "exploration-disasters",
+    "tags": [
+      "nuclear",
+      "Ukraine",
+      "Soviet Union",
+      "disaster"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Chernobyl_Disaster.jpg/640px-Chernobyl_Disaster.jpg",
+    "imageCaption": "Chernobyl reactor No. 4 after the explosion",
+    "source": "https://en.wikipedia.org/wiki/Chernobyl_disaster",
+    "region": "Europe",
+    "wikipediaSlug": "Chernobyl_disaster"
+  },
+  {
+    "id": "berlin-wall-falls-1989",
+    "event": "Berlin Wall Falls",
+    "year": 1989,
+    "month": 11,
+    "day": 9,
+    "description": "East Germany opened its borders and jubilant crowds began demolishing the Berlin Wall, which had divided the city since 1961. The fall of the Wall marked the beginning of the end of the Cold War and German reunification followed less than a year later.",
+    "category": "war-politics",
+    "tags": [
+      "Germany",
+      "Cold War",
+      "communism",
+      "reunification"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/TheFall_of_the_Berlin_Wall_1989.jpg/640px-TheFall_of_the_Berlin_Wall_1989.jpg",
+    "imageCaption": "Crowds atop the Berlin Wall, 9 November 1989",
+    "source": "https://en.wikipedia.org/wiki/Fall_of_the_Berlin_Wall",
+    "region": "Europe",
+    "wikipediaSlug": "Fall_of_the_Berlin_Wall"
+  },
+  {
+    "id": "world-wide-web-1991",
+    "event": "World Wide Web Goes Public",
+    "year": 1991,
+    "month": 8,
+    "day": 6,
+    "description": "Tim Berners-Lee published the first public website and made the World Wide Web freely available to all. Built on his earlier proposal at CERN, the Web transformed how humanity communicates, shares information, and conducts commerce.",
+    "category": "science-technology",
+    "tags": [
+      "internet",
+      "technology",
+      "CERN",
+      "communication"
+    ],
+    "difficulty": 2,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/WWW_logo_by_Robert_Cailliau.svg/640px-WWW_logo_by_Robert_Cailliau.svg.png",
+    "imageCaption": "The original World Wide Web logo, 1991",
+    "source": "https://en.wikipedia.org/wiki/World_Wide_Web",
+    "region": "Europe",
+    "wikipediaSlug": "World_Wide_Web"
+  },
+  {
+    "id": "iphone-2007",
+    "event": "First iPhone Released",
+    "year": 2007,
+    "month": 6,
+    "day": 29,
+    "description": "Apple CEO Steve Jobs unveiled and released the first iPhone, combining a mobile phone, an iPod, and an internet device into one touchscreen device. It launched the smartphone era and fundamentally changed how billions of people interact with technology.",
+    "category": "science-technology",
+    "tags": [
+      "technology",
+      "Apple",
+      "smartphone",
+      "internet"
+    ],
+    "difficulty": 1,
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/IPhone_1st_Gen.svg/480px-IPhone_1st_Gen.svg.png",
+    "imageCaption": "The original Apple iPhone, 2007",
+    "source": "https://en.wikipedia.org/wiki/IPhone_(1st_generation)",
+    "region": "North America",
+    "wikipediaSlug": "IPhone_(1st_generation)"
+  }
+]
