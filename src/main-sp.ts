@@ -538,7 +538,9 @@ function renderDiscardPile(discards: Card[], handSize: number): void {
 
 // ── Drop handler ──────────────────────────────────────────────────────────────
 function handleDrop(cardId: string, insertIndex: number): void {
-  if (!gameState || gameState.phase !== 'playing') return;
+  if (!gameState) return;
+  const currentPhase = gameState.phase;
+  if (currentPhase !== 'playing') return;
   clearSelectedCard();
 
   const { correct } = placeCardLocal(gameState, cardId, insertIndex);
