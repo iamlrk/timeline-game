@@ -45,12 +45,13 @@ const pillHandCount    = document.getElementById('pill-hand-count')!;
 const pillDiscardCount = document.getElementById('pill-discard-count')!;
 
 // ── Hide multiplayer-only elements ────────────────────────────────────────────
-(document.getElementById('btn-create') as HTMLElement | null)?.setAttribute('hidden', '');
-(document.getElementById('btn-join')   as HTMLElement | null)?.setAttribute('hidden', '');
-(document.getElementById('lobby-code') as HTMLElement | null)?.setAttribute('hidden', '');
-(document.querySelector('.lobby-join-row') as HTMLElement | null)?.setAttribute('hidden', '');
+const _hide = (el: Element | null) => { if (el) (el as HTMLElement).style.display = 'none'; };
+_hide(document.getElementById('btn-create'));
+_hide(document.getElementById('btn-join'));
+_hide(document.getElementById('lobby-code'));
+_hide(document.querySelector('.lobby-join-row'));
 document.querySelectorAll<HTMLElement>('.lobby-or-row').forEach(el => {
-  if (el.textContent?.toLowerCase().includes('multiplayer')) el.setAttribute('hidden', '');
+  if (el.textContent?.toLowerCase().includes('multiplayer')) el.style.display = 'none';
 });
 
 // ── Session state ─────────────────────────────────────────────────────────────
