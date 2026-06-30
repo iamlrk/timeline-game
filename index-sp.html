@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <title>Timeline Game</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230a0a0a'/><text x='50' y='68' font-size='52' font-weight='900' font-family='sans-serif' fill='%237b6cff' text-anchor='middle'>TL</text></svg>" />
+  </head>
+  <body>
+
+    <!-- ── Lobby screen ─────────────────────────────────────────────────── -->
+    <div id="lobby" class="lobby-overlay">
+      <div class="lobby-deco lobby-deco--1"></div>
+      <div class="lobby-deco lobby-deco--2"></div>
+      <div class="lobby-deco lobby-deco--3"></div>
+
+      <div class="lobby-content">
+        <!-- Left: branding + how to play -->
+        <div class="lobby-left">
+          <div>
+            <h1 class="lobby-title">TIMELINE</h1>
+            <p class="lobby-tagline">Test your knowledge of history</p>
+          </div>
+
+          <div class="lobby-howto">
+            <p class="lobby-howto-label">How to Play</p>
+            <div class="lobby-step">
+              <div class="lobby-step-num">1</div>
+              <div>
+                <div class="lobby-step-title">Draw a card</div>
+                <div class="lobby-step-desc">Each card shows a historical event with its date hidden</div>
+              </div>
+            </div>
+            <div class="lobby-step">
+              <div class="lobby-step-num">2</div>
+              <div>
+                <div class="lobby-step-title">Place on the timeline</div>
+                <div class="lobby-step-desc">Drag or tap to place it in chronological order</div>
+              </div>
+            </div>
+            <div class="lobby-step">
+              <div class="lobby-step-num">3</div>
+              <div>
+                <div class="lobby-step-title">Score or retry</div>
+                <div class="lobby-step-desc">Correct placements earn points — wrong ones cost a life in Daily mode</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="lobby-categories">
+            <button class="lobby-cat lobby-cat--all lobby-cat--active" data-cat="all">All</button>
+            <button class="lobby-cat lobby-cat--a lobby-cat--active" data-cat="science-technology">Science</button>
+            <button class="lobby-cat lobby-cat--b lobby-cat--active" data-cat="war-politics">War &amp; Politics</button>
+            <button class="lobby-cat lobby-cat--c lobby-cat--active" data-cat="exploration-disasters">Exploration</button>
+            <button class="lobby-cat lobby-cat--d lobby-cat--active" data-cat="art-culture-religion">Arts</button>
+          </div>
+        </div>
+
+        <!-- Right: form panel -->
+        <div class="lobby-panel">
+          <div class="lobby-form">
+
+            <!-- Daily Challenge -->
+            <div class="daily-section">
+              <div class="daily-section-header">
+                <div class="daily-section-title">Daily Challenge</div>
+                <div id="daily-date-label" class="daily-section-date"></div>
+              </div>
+              <div class="daily-btns">
+                <button class="daily-btn" id="daily-btn-easy" data-diff="easy">
+                  <div class="daily-btn-diff">Easy</div>
+                  <div class="daily-btn-status" id="daily-status-easy">Play</div>
+                  <div class="daily-btn-streak" id="daily-streak-easy">&#128293; 0</div>
+                </button>
+                <button class="daily-btn" id="daily-btn-medium" data-diff="medium">
+                  <div class="daily-btn-diff">Medium</div>
+                  <div class="daily-btn-status" id="daily-status-medium">Play</div>
+                  <div class="daily-btn-streak" id="daily-streak-medium">&#128293; 0</div>
+                </button>
+                <button class="daily-btn" id="daily-btn-hard" data-diff="hard">
+                  <div class="daily-btn-diff">Hard</div>
+                  <div class="daily-btn-status" id="daily-status-hard">Play</div>
+                  <div class="daily-btn-streak" id="daily-streak-hard">&#128293; 0</div>
+                </button>
+              </div>
+            </div>
+
+            <div class="lobby-or-row">
+              <span class="lobby-divider"></span>
+              <span class="lobby-or">Custom Game</span>
+              <span class="lobby-divider"></span>
+            </div>
+
+            <input id="lobby-name" class="lobby-input" type="text" placeholder="Your name" value="Player" maxlength="20" />
+
+            <!-- Difficulty selector -->
+            <div class="diff-selector">
+              <div class="diff-label">Difficulty</div>
+              <div class="diff-btns">
+                <button class="diff-btn diff-btn--active" data-diff="easy">
+                  <span class="diff-btn-name">Easy</span>
+                  <span class="diff-btn-desc">Millennia</span>
+                </button>
+                <button class="diff-btn" data-diff="medium">
+                  <span class="diff-btn-name">Medium</span>
+                  <span class="diff-btn-desc">Centuries</span>
+                </button>
+                <button class="diff-btn" data-diff="hard">
+                  <span class="diff-btn-name">Hard</span>
+                  <span class="diff-btn-desc">Decades</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="lobby-buttons">
+              <button id="btn-solo" class="lobby-btn lobby-btn--solo">Play Now</button>
+            </div>
+
+            <div id="lobby-status" class="lobby-status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Game screen ──────────────────────────────────────────────────── -->
+    <div id="app" hidden>
+      <header class="hud">
+        <div id="players-hud" class="players-hud"></div>
+
+        <div class="hud-center">
+          <h1 class="game-title">TIMELINE</h1>
+          <div id="turn-indicator" class="game-subtitle">Classic Mode</div>
+        </div>
+
+        <div class="hud-right">
+          <div class="hud-stat">
+            <span class="hud-label">Turn</span>
+            <span id="turn" class="hud-value">1</span>
+          </div>
+          <div class="hud-divider"></div>
+          <div class="hud-stat">
+            <span class="hud-label">Deck</span>
+            <span id="deck-count" class="hud-value">&#8212;</span>
+          </div>
+          <div class="hud-divider"></div>
+          <button id="btn-exit" class="hud-exit-btn" title="Exit to home">&#8592;</button>
+        </div>
+      </header>
+
+      <main class="game-board">
+        <div class="timeline-wrapper">
+          <div id="timeline" class="timeline"></div>
+        </div>
+      </main>
+
+      <footer class="hand-area">
+        <div class="hand-pill" id="hand-pill" hidden>
+          <button class="hand-pill-btn hand-pill-btn--active" id="pill-hand">
+            Hand <span class="pill-badge" id="pill-hand-count">0</span>
+          </button>
+          <button class="hand-pill-btn" id="pill-discard">
+            Discarded <span class="pill-badge pill-badge--discard" id="pill-discard-count">0</span>
+          </button>
+        </div>
+        <div class="hand-sections">
+          <div class="hand-section" id="hand-section">
+            <div class="hand-header hand-header--desktop">
+              <div class="hand-label">Your Hand</div>
+              <div class="hand-count"><span id="hand-count">0</span> cards</div>
+            </div>
+            <div id="player-hand" class="player-hand"></div>
+          </div>
+          <div class="hand-section hand-section--discard" id="discard-section" hidden>
+            <div class="hand-header">
+              <div class="hand-label hand-label--discard">Discarded</div>
+              <div class="hand-count"><span id="discard-count">0</span> cards</div>
+            </div>
+            <div id="discard-pile" class="player-hand player-hand--discard"></div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- ── Game-over overlay ────────────────────────────────────────────── -->
+    <div id="game-over" class="game-over-overlay" hidden>
+      <div class="game-over-panel">
+        <div class="game-over-title">Game Over</div>
+        <div id="game-over-subtitle" class="game-over-subtitle">Classic Mode &#8212; Final Score</div>
+        <div id="final-scores" class="final-scores"></div>
+
+        <!-- Daily result — shown only in daily mode -->
+        <div id="daily-result" class="daily-result" hidden>
+          <pre id="daily-share-pre" class="daily-share-pre"></pre>
+          <div class="daily-streak-row">
+            <div class="daily-streak-stat">
+              <div class="daily-streak-num" id="dr-streak">0</div>
+              <div class="daily-streak-label">Streak</div>
+            </div>
+            <div class="daily-streak-stat">
+              <div class="daily-streak-num" id="dr-best">0</div>
+              <div class="daily-streak-label">Best</div>
+            </div>
+            <div class="daily-streak-stat">
+              <div class="daily-streak-num" id="dr-played">0</div>
+              <div class="daily-streak-label">Played</div>
+            </div>
+          </div>
+          <button id="daily-copy-btn" class="daily-copy-btn">&#128203; Copy Result</button>
+        </div>
+
+        <button id="restart-btn" class="restart-btn">Play Again</button>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main-sp.ts"></script>
+  </body>
+</html>
