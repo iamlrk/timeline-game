@@ -6,11 +6,11 @@ function renameSpHtmlPlugin(): Plugin {
   return {
     name: 'rename-sp-html',
     generateBundle(_, bundle) {
-      for (const key of Object.keys(bundle)) {
-        const chunk = bundle[key] as any;
-        if (chunk.fileName === 'index-sp.html') {
-          chunk.fileName = 'index.html';
-        }
+      const chunk = bundle['index-sp.html'] as any;
+      if (chunk) {
+        chunk.fileName = 'index.html';
+        bundle['index.html'] = chunk;
+        delete bundle['index-sp.html'];
       }
     },
   };
