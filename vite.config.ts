@@ -1,17 +1,15 @@
 import { defineConfig, type Plugin } from 'vite';
 import { resolve } from 'path';
+import { renameSync, existsSync } from 'fs';
 
-/** In singleplayer mode, rename index-sp.html → index.html in the output. */
+/** In singleplayer mode, rename dist/index-sp.html → dist/index.html after build. */
 function renameSpHtmlPlugin(): Plugin {
   return {
     name: 'rename-sp-html',
-    generateBundle(_, bundle) {
-      const chunk = bundle['index-sp.html'] as any;
-      if (chunk) {
-        chunk.fileName = 'index.html';
-        bundle['index.html'] = chunk;
-        delete bundle['index-sp.html'];
-      }
+    closeBundle() {
+      const src = resolve(__dirname, 'dist/index-sp.html');
+      const dst = resolve(__dirname, 'dist/index.html');
+      if (existsSync(src)) renameSync(src, dst);
     },
   };
 }
